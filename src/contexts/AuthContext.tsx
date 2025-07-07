@@ -1,9 +1,9 @@
-import { createContext, useState, type ReactNode, useContext } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 type Role = "Admin" | "Patient" | null;
 
 interface AuthContextType {
-  user: { role: Role; email: string } | null;
+  user: { email: string; role: Role } | null;
   login: (email: string, password: string) => boolean;
   logout: () => void;
 }
@@ -20,26 +20,28 @@ const mockUsers = [
 ];
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<AuthContextType["user"]>(null);
+  const [user, setUser] = useState<AuthContextType["user"]>(() => {
+    const stored = localStorage.getItem("user");
+    return stored ? JSON.parse(stored) : null;
+  });
 
   const login = (email: string, password: string) => {
-    const found = mockUsers.find(
-      (u) => u.email === email && u.password === password
-    );
+    const found = mockUsers.find((u) => u.email === email && u.password === password);
     if (found) {
-      setUser({ role: found.role as Role, email: found.email });
+      const userObj = { email: found.email, role: found.role as Role };
+      setUser(userObj);
+      localStorage.setItem("user", JSON.stringify(userObj));
       return true;
     }
     return false;
   };
 
-  const logout = () => setUser(null);
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+  };
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);
