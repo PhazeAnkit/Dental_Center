@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import Calendar from "react-calendar";
-import 'react-calendar/dist/Calendar.css';
-import '../styles/CalendarStyles.css'
+import "react-calendar/dist/Calendar.css";
+import "../styles/CalendarStyles.css";
 import AdminLayout from "../Layout/AdminLayout";
 import { ThemeContext } from "../contexts/ThemeContext";
 
@@ -40,7 +40,9 @@ const CalendarView = () => {
           <Calendar
             onChange={setSelectedDate}
             value={selectedDate}
-            className={`react-calendar ${darkMode ? "react-calendar--dark" : ""}`}
+            className={`react-calendar ${
+              darkMode ? "react-calendar--dark" : ""
+            }`}
             tileContent={({ date, view }) => {
               if (view === "month") {
                 const match = appointments.some(
@@ -65,7 +67,10 @@ const CalendarView = () => {
           ) : (
             <ul className="space-y-3">
               {dayAppointments.map((appt) => (
-                <li key={appt.id} className="p-3 border rounded-lg dark:border-gray-700">
+                <li
+                  key={appt.id}
+                  className="p-3 border rounded-lg dark:border-gray-700"
+                >
                   <p className="font-medium">{appt.patientName}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
                     Treatment: {appt.treatment}

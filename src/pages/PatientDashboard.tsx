@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import AdminLayout from "../Layout/PatientLayout";
-import type { Patient, Incident } from "../types";
+import PatientLayout from "../Layout/PatientLayout";
+import type { Patient, Incident } from "../types/storage";
+import BookAppointmentModal from "../components/BookAppointmentModal";
 
 const PatientDashboard = () => {
   const { user } = useAuth();
   const [patient, setPatient] = useState<Patient | null>(null);
   const [incidents, setIncidents] = useState<Incident[]>([]);
+  const [showBooking, setShowBooking] = useState(false);
+  const [confirmation, setConfirmation] = useState(false);
 
   useEffect(() => {
     if (!user?.patientId) return;
@@ -26,15 +29,32 @@ const PatientDashboard = () => {
     setIncidents(patientIncidents);
   }, [user]);
 
+  const handleBookAppointment = (newIncident: Incident) => {
+    const all = JSON.parse(localStorage.getItem("incidents") || "[]");
+    const updated = [...all, newIncident];
+    localStorage.setItem("incidents", JSON.stringify(updated));
+    setIncidents(updated.filter((i) => i.patientId === user.patientId));
+    setConfirmation(true);
+    setTimeout(() => setConfirmation(false), 3000);
+  };
+
   if (!patient) return <div className="p-6">Loading...</div>;
 
   return (
-    <AdminLayout>
+    <PatientLayout>
       <h2 className="text-2xl font-bold mb-4">Welcome, {patient.name}</h2>
 
-      {/* Profile Section */}
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-xl font-semibold">Your Profile</h3>
+        <button
+          onClick={() => setShowBooking(true)}
+          className="bg-primary text-white px-4 py-2 rounded"
+        >
+          + Book Appointment
+        </button>
+      </div>
+
       <div className="mb-6 bg-white dark:bg-gray-800 p-4 rounded shadow">
-        <h3 className="text-xl font-semibold mb-3">Your Profile</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <p>
             <strong>DOB:</strong> {patient.dob}
@@ -48,7 +68,6 @@ const PatientDashboard = () => {
         </div>
       </div>
 
-      {/* Incidents Section */}
       <div className="bg-white dark:bg-gray-800 p-4 rounded shadow">
         <h3 className="text-xl font-semibold mb-3">Your Treatment History</h3>
         {incidents.length === 0 ? (
@@ -66,12 +85,26 @@ const PatientDashboard = () => {
                 <p className="text-xs text-gray-400">
                   Appointment: {new Date(inc.appointmentDate).toLocaleString()}
                 </p>
+                <p className="text-xs text-gray-400">Status: {inc.status}</p>
               </li>
             ))}
           </ul>
         )}
       </div>
-    </AdminLayout>
+
+      {confirmation && (
+        <div className="mt-4 text-green-600 text-sm">
+          ✅ Appointment submitted successfully!
+        </div>
+      )}
+
+      <BookAppointmentModal
+        isOpen={showBooking}
+        onClose={() => setShowBooking(false)}
+        onBook={handleBookAppointment}
+        patientId={user.patientId}
+      />
+    </PatientLayout>
   );
 };
 

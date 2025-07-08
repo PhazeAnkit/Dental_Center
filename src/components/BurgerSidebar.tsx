@@ -1,4 +1,3 @@
-// src/components/layout/BurgerSidebar.tsx
 import {
   Drawer,
   List,
@@ -29,13 +28,18 @@ export const BurgerSidebar = () => {
 
   const handleNavigate = (path: string) => {
     navigate(path);
-    setIsDrawerOpen(false); // Auto close on navigation
+    setIsDrawerOpen(false);
   };
 
   return (
     <>
       {/* Hamburger Icon */}
-      <IconButton variant="text" size="lg" onClick={toggleDrawer} className="md:hidden">
+      <IconButton
+        variant="text"
+        size="lg"
+        onClick={toggleDrawer}
+        className="md:hidden"
+      >
         {isDrawerOpen ? (
           <XMarkIcon className="h-6 w-6" />
         ) : (

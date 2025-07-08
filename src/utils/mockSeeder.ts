@@ -1,4 +1,4 @@
-import type { User, Patient, Incident } from "../types";
+import type { User, Patient, Incident } from "../types/storage";
 
 export const seedMockData = () => {
   if (!localStorage.getItem("users")) {

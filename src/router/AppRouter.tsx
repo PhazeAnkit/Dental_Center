@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Login from "../pages/Login";
 import TestPage from "../pages/TestPage";
@@ -7,6 +7,7 @@ import CalendarView from "../pages/Calendar";
 import PatientsPage from "../pages/PatientsPages";
 import PatientDetailPage from "../pages/PatientDetailPage";
 import PatientDashboard from "../pages/PatientDashboard";
+import IncidentPage from "../pages/IncidentPage";
 
 const AppRouter = () => {
   const { user } = useAuth();
@@ -22,6 +23,7 @@ const AppRouter = () => {
           <Route path="/admin/patients" element={<PatientsPage />} />
           <Route path="/admin/calendar" element={<CalendarView />} />
           <Route path="/admin/patients/:id" element={<PatientDetailPage />} />
+          <Route path="/admin/incidents" element={<IncidentPage />} />
         </>
       )}
 

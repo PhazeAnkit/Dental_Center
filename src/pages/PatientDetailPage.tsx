@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AdminLayout from "../Layout/AdminLayout";
-import type { Patient } from "../types/index";
+import type { Patient } from "../types/storage";
 import { v4 as uuidv4 } from "uuid";
 import * as Yup from "yup";
 
@@ -84,7 +84,6 @@ const PatientsPage = () => {
     setEditingId(null);
     setFormError(null);
   };
-  
 
   const filteredPatients = patients.filter(
     (p) =>

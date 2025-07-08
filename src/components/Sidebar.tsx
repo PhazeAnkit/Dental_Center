@@ -4,16 +4,24 @@ import {
   PresentationChartBarIcon,
   UserCircleIcon,
   CalendarDaysIcon,
+  ClipboardDocumentListIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
 } from "@heroicons/react/24/outline";
 
 const navItems = [
   { path: "/admin", label: "Dashboard", icon: PresentationChartBarIcon },
   { path: "/admin/patients", label: "Patients", icon: UserCircleIcon },
   { path: "/admin/calendar", label: "Calendar", icon: CalendarDaysIcon },
+  {
+    path: "/admin/incidents",
+    label: "Incidents",
+    icon: ClipboardDocumentListIcon,
+  },
 ];
 
 const Sidebar = () => {
-  const { isOpen, collapsed, closeSidebar } = useSidebar();
+  const { isOpen, collapsed, toggleCollapse, closeSidebar } = useSidebar();
 
   return (
     <aside
@@ -23,7 +31,22 @@ const Sidebar = () => {
         ${collapsed ? "w-16" : "w-64"}
       `}
     >
-      <div className="p-4 font-bold text-lg">{!collapsed && "ENTNT Admin"}</div>
+      {/* Top Section */}
+      <div className="flex items-center justify-between px-4 py-4">
+        {!collapsed && <div className="font-bold text-lg">ENTNT Admin</div>}
+        <button
+          onClick={toggleCollapse}
+          className="text-gray-500 hover:text-black dark:hover:text-white"
+        >
+          {collapsed ? (
+            <ChevronDoubleRightIcon className="h-5 w-5" />
+          ) : (
+            <ChevronDoubleLeftIcon className="h-5 w-5" />
+          )}
+        </button>
+      </div>
+
+      {/* Navigation */}
       <nav className="flex flex-col space-y-1 px-2">
         {navItems.map(({ path, label, icon: Icon }) => (
           <NavLink
@@ -32,7 +55,9 @@ const Sidebar = () => {
             end
             className={({ isActive }) =>
               `flex items-center gap-3 px-4 py-2 rounded-md transition ${
-                isActive ? "bg-primary text-white" : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                isActive
+                  ? "bg-primary text-white"
+                  : "hover:bg-gray-100 dark:hover:bg-gray-800"
               }`
             }
             onClick={() => {

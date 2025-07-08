@@ -24,11 +24,11 @@ export interface Incident {
   patientId: string;
   title: string;
   description: string;
-  comments: string;
+  comments?: string;
   appointmentDate: string;
   cost: number;
   status: "Pending" | "Completed";
-  files: IncidentFile[];
+  files: { name: string; url: string }[];
 }
 
 export interface Incident {

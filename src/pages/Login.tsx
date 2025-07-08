@@ -2,7 +2,7 @@
 import LoginForm from "../components/LoginForm";
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
-import dentistImage from "../assets/Login_Image.webp"; 
+import dentistImage from "../assets/Login_Image.webp";
 
 const Login = () => {
   const { toggleTheme, darkMode } = useContext(ThemeContext);
