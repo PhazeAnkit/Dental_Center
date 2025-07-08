@@ -35,6 +35,7 @@ export const BurgerSidebar = () => {
     <>
       {/* Hamburger Icon */}
       <IconButton
+        {...({} as any)}
         variant="text"
         size="lg"
         onClick={toggleDrawer}
@@ -48,29 +49,37 @@ export const BurgerSidebar = () => {
       </IconButton>
 
       {/* Drawer */}
-      <Drawer open={isDrawerOpen} onClose={toggleDrawer}>
-        <Card className="h-full w-full p-4">
+      <Drawer {...({} as any)} open={isDrawerOpen} onClose={toggleDrawer}>
+        <Card className="h-full w-full p-4" {...({} as any)}>
           <div className="flex items-center justify-between mb-6">
-            <Typography variant="h5">ENTNT Admin</Typography>
-            <IconButton variant="text" onClick={toggleDrawer}>
+            <Typography variant="h5" {...({} as any)}>
+              ENTNT Admin
+            </Typography>
+            <IconButton {...({} as any)} variant="text" onClick={toggleDrawer}>
               <XMarkIcon className="h-5 w-5" />
             </IconButton>
           </div>
-          <List>
-            <ListItem onClick={() => handleNavigate("/admin")}>
-              <ListItemPrefix>
+          <List {...({} as any)}>
+            <ListItem onClick={() => handleNavigate("/admin")} {...({} as any)}>
+              <ListItemPrefix {...({} as any)}>
                 <PresentationChartBarIcon className="h-5 w-5" />
               </ListItemPrefix>
               Dashboard
             </ListItem>
-            <ListItem onClick={() => handleNavigate("/admin/patients")}>
-              <ListItemPrefix>
+            <ListItem
+              onClick={() => handleNavigate("/admin/patients")}
+              {...({} as any)}
+            >
+              <ListItemPrefix {...({} as any)}>
                 <UserCircleIcon className="h-5 w-5" />
               </ListItemPrefix>
               Patients
             </ListItem>
-            <ListItem onClick={() => handleNavigate("/admin/calendar")}>
-              <ListItemPrefix>
+            <ListItem
+              onClick={() => handleNavigate("/admin/calendar")}
+              {...({} as any)}
+            >
+              <ListItemPrefix {...({} as any)}>
                 <CalendarDaysIcon className="h-5 w-5" />
               </ListItemPrefix>
               Calendar
@@ -80,8 +89,9 @@ export const BurgerSidebar = () => {
                 logout();
                 navigate("/");
               }}
+              {...({} as any)}
             >
-              <ListItemPrefix>
+              <ListItemPrefix {...({} as any)}>
                 <PowerIcon className="h-5 w-5 text-red-500" />
               </ListItemPrefix>
               <span className="text-red-500">Logout</span>

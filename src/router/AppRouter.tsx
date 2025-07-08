@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Login from "../pages/Login";
 import TestPage from "../pages/TestPage";
-import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/AdminDashboard";
 import CalendarView from "../pages/Calendar";
 import PatientsPage from "../pages/PatientsPages";
 import PatientDetailPage from "../pages/PatientDetailPage";

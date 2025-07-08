@@ -14,9 +14,10 @@ interface Appointment {
 
 const CalendarView = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [dayAppointments, setDayAppointments] = useState<Appointment[]>([]);
-  const { darkMode } = useContext(ThemeContext); // ← get theme
+  const { darkMode } = useContext(ThemeContext);
+  type Value = Date | [Date, Date] | null;
+  const [selectedDate, setSelectedDate] = useState<Value>(new Date());
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("appointments") || "[]");
@@ -26,7 +27,7 @@ const CalendarView = () => {
   useEffect(() => {
     const filtered = appointments.filter((appt) => {
       const apptDate = new Date(appt.date);
-      return apptDate.toDateString() === selectedDate.toDateString();
+      return apptDate.toDateString() === selectedDate.toString();
     });
     setDayAppointments(filtered);
   }, [selectedDate, appointments]);
@@ -60,7 +61,7 @@ const CalendarView = () => {
 
         <div className="rounded-lg p-4 shadow bg-white dark:bg-gray-800">
           <h3 className="text-xl font-semibold mb-3">
-            Appointments on {selectedDate.toDateString()}
+            Appointments on {selectedDate.toString()}
           </h3>
           {dayAppointments.length === 0 ? (
             <p className="text-gray-500 dark:text-gray-300">No appointments.</p>

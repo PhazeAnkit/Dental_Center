@@ -8,11 +8,13 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "tailwind:init": "tailwindcss init -p"
+    "tailwind:init": "tailwindcss init -p",
+    "start": "vite preview"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@material-tailwind/react": "^2.1.10",
+    "cross-env": "^7.0.3",
     "framer-motion": "^12.23.0",
     "react": "^19.1.0",
     "react-calendar": "^6.0.0",
