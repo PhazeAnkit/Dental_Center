@@ -3,6 +3,7 @@ import AdminLayout from "../Layout/AdminLayout";
 import type { Patient } from "../types/storage";
 import { v4 as uuidv4 } from "uuid";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const PatientsPage = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -11,6 +12,7 @@ const PatientsPage = () => {
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const patientSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -130,6 +132,14 @@ const PatientsPage = () => {
                     onClick={() => handleDelete(p.id)}
                   >
                     Delete
+                  </button>
+                  <button
+                    className="text-purple-600 dark:text-purple-400"
+                    onClick={() =>
+                      navigate(`/admin/patients/${p.id}/incidents`)
+                    }
+                  >
+                    View History
                   </button>
                 </td>
               </tr>

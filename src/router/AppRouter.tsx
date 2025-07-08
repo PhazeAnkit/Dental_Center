@@ -8,6 +8,7 @@ import PatientsPage from "../pages/PatientsPages";
 import PatientDetailPage from "../pages/PatientDetailPage";
 import PatientDashboard from "../pages/PatientDashboard";
 import IncidentPage from "../pages/IncidentPage";
+import PatientIncidentsPage from "../pages/PatientIncidentsPage";
 
 const AppRouter = () => {
   const { user } = useAuth();
@@ -24,6 +25,10 @@ const AppRouter = () => {
           <Route path="/admin/calendar" element={<CalendarView />} />
           <Route path="/admin/patients/:id" element={<PatientDetailPage />} />
           <Route path="/admin/incidents" element={<IncidentPage />} />
+          <Route
+            path="/admin/patients/:id/incidents"
+            element={<PatientIncidentsPage />}
+          />
         </>
       )}
 
