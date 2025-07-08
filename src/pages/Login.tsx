@@ -2,14 +2,13 @@
 import LoginForm from "../components/LoginForm";
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
-import dentistImage from "../assets/Login_Image.webp"; // Use the image you uploaded
+import dentistImage from "../assets/Login_Image.webp"; 
 
 const Login = () => {
   const { toggleTheme, darkMode } = useContext(ThemeContext);
 
   return (
     <div className="min-h-screen flex">
-      {/* Left Image Side */}
       <div
         className="hidden md:flex w-1/2 bg-cover bg-center relative"
         style={{ backgroundImage: `url(${dentistImage})` }}

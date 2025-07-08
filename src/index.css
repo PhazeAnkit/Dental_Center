@@ -7,3 +7,6 @@ body {
   @apply bg-background text-black dark:bg-darkBg dark:text-white;
   font-family: "Inter", sans-serif;
 }
+.input {
+  @apply border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-black dark:text-white outline-none w-full;
+}

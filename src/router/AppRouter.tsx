@@ -4,40 +4,33 @@ import Login from "../pages/Login";
 import TestPage from "../pages/TestPage";
 import Dashboard from "../pages/Dashboard";
 import CalendarView from "../pages/Calendar";
+import PatientsPage from "../pages/PatientsPages";
+import PatientDetailPage from "../pages/PatientDetailPage";
+import PatientDashboard from "../pages/PatientDashboard";
 
 const AppRouter = () => {
   const { user } = useAuth();
 
   return (
     <Routes>
-      {/* Public */}
       <Route path="/" element={<Login />} />
       <Route path="/test" element={<TestPage />} />
 
-      {/* Protected Routes */}
-      <Route
-        path="/admin"
-        element={user?.role === "Admin" ? <Dashboard /> : <Navigate to="/" />}
-      />
+      {user?.role === "Admin" && (
+        <>
+          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin/patients" element={<PatientsPage />} />
+          <Route path="/admin/calendar" element={<CalendarView />} />
+          <Route path="/admin/patients/:id" element={<PatientDetailPage />} />
+        </>
+      )}
 
-      <Route
-        path="/patient"
-        element={
-          user?.role === "Patient" ? (
-            <div>Patient Page</div>
-          ) : (
-            <Navigate to="/" />
-          )
-        }
-      />
-      <Route
-        path="/admin/calendar"
-        element={
-          user?.role === "Admin" ? <CalendarView /> : <Navigate to="/" />
-        }
-      />
+      {user?.role === "Patient" && (
+        <>
+          <Route path="/patient" element={<PatientDashboard />} />
+        </>
+      )}
 
-      {/* Fallback */}
       <Route path="*" element={<div>404 - Page Not Found</div>} />
     </Routes>
   );

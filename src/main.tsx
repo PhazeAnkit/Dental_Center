@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./index.css"; // Tailwind CSS
+import "./index.css"; 
+import { seedMockData } from "./utils/mockSeeder"; 
+seedMockData();
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Root element not found");

@@ -30,3 +30,17 @@ export interface Incident {
   status: "Pending" | "Completed";
   files: IncidentFile[];
 }
+
+export interface Incident {
+  id: string;
+  patientId: string;
+  title: string;
+  description: string;
+  comments: string;
+  appointmentDate: string;
+  cost?: number;
+  treatment?: string;
+  status?: string;
+  nextDate?: string;
+  files?: { name: string; url: string }[];
+}
