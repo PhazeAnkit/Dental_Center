@@ -1,69 +1,81 @@
-# React + TypeScript + Vite
+# 🦷 ENTNT Dental Care Admin Dashboard (React + Tailwind)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive dental center management dashboard built using **React**, **TypeScript**, and **TailwindCSS**. Designed to manage patients, appointments, and incidents with a clean UI and local storage persistence.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+### 🔐 Authentication
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Email/password-based login.
+- Session persistence via `localStorage`.
+- Two roles: `Admin` and `Patient`.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🧑‍⚕️ Admin Panel
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- View, add, edit, delete **Patients**.
+- Track and manage **Incidents (treatments)** per patient.
+- See scheduled appointments in a **calendar view**.
+- Responsive UI with **Dark mode**, **Sidebar collapse**, and **Burger menu**.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 👨‍⚕️ Patient Panel
+
+- View personal profile and health history.
+- Review past **treatment incidents**.
+- Book new appointments via a simple **form modal**.
+- Instant confirmation feedback and clean UX.
+
+### 🧪 Tech Stack
+
+- React + TypeScript
+- Tailwind CSS (with custom theme)
+- React Router
+- React Calendar
+- Yup (for validation)
+- LocalStorage for mock persistence
+- Framer Motion + Toast Notifications (for animations/feedback)
+
+---
+
+## 🧪 Dummy Accounts
+
+To explore the app, use these built-in demo users:
+
+### 👤 Admin
+
+- **Email:** `admin@entnt.in`
+- **Password:** `admin123`
+
+### 🧑 Patient
+
+- **Email:** `john@entnt.in`
+- **Password:** `patient123`
+
+Accounts are seeded on first load via `mockSeeder.ts`.
+
+---
+
+## 🛠️ Setup Instructions
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/PhazeAnkit/Dental_Center.git
+cd Dental_Center
+
+# 2. Install dependencies
+npm install
+
+# 3. Run the app
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+App runs at: `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+To build for production:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
 ```
+
+---
